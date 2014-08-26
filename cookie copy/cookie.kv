@@ -1,0 +1,157 @@
+#: kivy 1.8.0
+
+
+
+<Game>:
+	player: PongPaddle
+	playbutton: PlayButton.__self__
+	ratebutton: RateButton.__self__
+	instructionbutton: InstructionButton.__self__
+	highscorebutton: HighScoreButton.__self__
+	pongball: PongBall
+
+	
+	Background1:
+		size_hint: (1, 1)
+		allow_stretch: True
+		keep_ratio: False
+			
+	PongPaddle:
+		id: PongPaddle
+		size_hint: (None, None)
+		center_x: root.center_x
+		center_y: root.y+self.height
+		
+	Label:
+		id: score
+		font_size: root.height/ 18
+		size_hint: (None, None)
+		pos_hint: {'center_x': 0.06, 'center_y': 0.96}
+		text: str(root.score)
+		bold: True
+		color: 0,0,0,1	
+	
+	Label:
+		id: topscore
+		font_size: root.height / 18
+		size_hint: (None, None)
+		pos_hint: {'center_x': 0.5, 'center_y': 0.97}
+		text: str(root.highscore)
+		bold: True
+		color: 0,0,0,1			
+		
+	Label:
+		id: balllife
+		font_size: root.height/3
+		size_hint: (None, None)
+		pos_hint: {'center_x':0.5, 'center_y': 0.5}
+		text: str(root.pongball.balllife -1)
+		bold: True
+		color: 0xbb / 255., 0xad / 255., 0xa0 / 255., 1
+		
+	Button: 
+		id: PlayButton
+		text: 'Play'
+		pos_hint: {'center_x': 0.3, 'center_y': 0.6}
+		font_size: self.height / 1.5
+		size_hint: (.2, .1)
+		on_release: root.play_pressed()
+		
+	Button:
+		id: RateButton
+		text: 'Rate'
+		pos_hint: {'center_x': 0.7, 'center_y': 0.6}
+		font_size: self.height/1.5
+		size_hint: (.2, .1)
+		on_release: root.rate_pressed()
+		
+	Button:
+		id: InstructionButton
+		text: 'Instructions'
+		pos_hint: {'center_x': 0.3, 'center_y': 0.4}
+		font_size: self.height/2.2
+		size_hint: (.2, .1)
+		on_release: root.instruction_pressed()
+	
+	Button:
+		id: HighScoreButton
+		text: 'Highscore'
+		pos_hint: {'center_x': 0.7, 'center_y': 0.4}
+		font_size: self.height/2.2
+		size_hint: (.2, .1)
+		on_release: root.leader_pressed()
+	
+	Restart:
+		id: restart
+				
+	PongBall:
+		id: PongBall
+		center_x: root.width/2
+		center_y: root.height - 100
+		
+
+<PongBall>:
+	size_hint: None, None
+	size: 50, 50
+	source: 'graphics/monster1/monster1.png'
+	anim_delay: .1
+	
+
+			
+<PongPaddle>:
+	size: 150, 15
+	canvas:
+		Color:
+			rgb: 0xbb / 255., 0xad / 255., 0xa0 / 255.
+		Rectangle:
+			pos: self.pos
+			size: self.size
+
+
+<Brick>:
+	size_hint: None, None
+	size: self.brickwidth, self.brickheight
+	canvas:
+		Color:
+			rgb: 0xbb / 255., 0xad / 255., 0xa0 / 255.
+		Rectangle:
+			pos: self.pos
+			size: self.size
+			
+			
+<Cookie>:
+	size_hint: None, None
+	size: self.csize, self.csize
+	source: 'graphics/cookie.png'
+
+<Restart>:
+	size_hint: 0.05, 0.05
+	pos_hint: {'x': 0.92, 'y': 0.92}
+	source: 'graphics/restart.png'
+	allow_stretch: True
+	keep_ratio: True
+	on_release: self.pressed()
+	
+<Background1>:
+	source: 'graphics/background.png'
+	
+<Scorepop>:
+	size_hint: (.4, .3)
+	title: "" 	
+	title_size: 0
+	separator_color: 0,0,0,1
+	BoxLayout:
+		orientation: 'vertical'
+		Label:
+			text: str(root.score) + "/20!"
+			font_size: 50
+		Image: 
+			source: root.currentmonster
+			anim_delay: 0.1
+			pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+			size_hint: None, None
+			size: 80, 80
+			allow_stretch: True
+			keep_ratio: True
+
+
