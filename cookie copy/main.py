@@ -442,14 +442,6 @@ class CookieApp(App):
 		g = Game()
 		return g
 
-def some_function(q, *args):
-	q.highscore = App.get_running_app().score
-	print q.highscore
-	
-def high_score_put(q, *args):
-	self.highscore = App.get_running_app().score
-	print "hs updated"
-
 		
 if __name__ == '__main__':
 	CookieApp().run()
