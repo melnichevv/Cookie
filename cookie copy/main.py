@@ -46,7 +46,7 @@ class Game(FloatLayout):
 	gmon4 = 'graphics/monster4/monster4.png'
 	amon4 = 'graphics/monster4/monster4.zip'
 
-	cookiescorejson = JsonStore(join(data_dir, 'cookiehighscore.json'))
+	cookiescorejson = None
 	
 	def __init__(self, *args, **kwargs):
 		super(Game, self).__init__(*args, **kwargs)
@@ -55,7 +55,7 @@ class Game(FloatLayout):
 					self.ratebutton.__self__,
 					self.instructionbutton.__self__,
 					self.highscorebutton.__self__]
-		
+		self.cookiescorejson = JsonStore(join(data_dir, 'cookiehighscore.json'))
 		if self.cookiescorejson.exists('cookiescore'):
 			self.highscore = int(self.cookiescorejson.get('cookiescore')['best'])
 
